@@ -58,6 +58,7 @@ class DetailsViewController: UIViewController {
             let description = splitted[2]
             let image = splitted[3]
             
+            
            
             
             i += 1;
