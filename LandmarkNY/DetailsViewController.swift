@@ -12,10 +12,30 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
+    
+    @IBOutlet weak var detailsTitle: UILabel!
+    @IBOutlet weak var detailsImage: UIImageView!
+    @IBOutlet weak var detailsDesc: UITextView!
+    
+    var landmarks = [String]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        loadDetails();
+        
+        let nameOfFile = "inputFile2"
+        landmarks = arrayFromContentsOfFileWithName(fileName: nameOfFile)!
+        
+        //Sample string
+        let str = "Trinity Church"
+        
+        loadDetail(landmark: str)
+        
+        
+        
+        
+        
+        
         
         
         
@@ -43,43 +63,48 @@ class DetailsViewController: UIViewController {
     
     
     
-    func loadDetails(){
-        let nameOfFile = "inputFile2"
-        var landmarks = [String]()
-        landmarks = arrayFromContentsOfFileWithName(fileName: nameOfFile)!
+    func loadDetail(landmark: String){
         
-        var i = 0
+        
+        
+        var i = 0;
+        
         while(i<17){
+            
             let temp = landmarks[i];
             
             
-            let splitted = temp.components(separatedBy: ";");
-            let title = splitted[1]
-            let description = splitted[2]
-            let image = splitted[3]
+            let splitted = temp.components(separatedBy: ",");
+            let title = splitted[0]
+            print(title)
             
             
-           
+            
+            if(title == landmark){
+                
+                let description = splitted[1]
+                let image = splitted[2]
+                
+                
+                detailsTitle.text = title
+                detailsDesc.text = description
+                detailsImage.image = UIImage(named: image)
+                
+                break;
+    
+            }
+            
+            
+            
             
             i += 1;
             
             
         }
-        
-        
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
     
+    
+  
     
     
     
